@@ -12,6 +12,6 @@ class Comments < Vault
 	key :message, 	String,	:required => true
 end
 
-class HightFives < Vault
+class HighFives < Vault
 	key :otheruser, String,	:required => true
 end
