@@ -16,11 +16,62 @@ LOG = Logbert[self]
 
 post '/event' do
 	LOG.info params
-	puts params
 	content_type :json
 	json = JSON.parse(request.body.read)
 	which_type(json).to_json
 end
+
+get '/events?from=:from&to=:to' do
+	from = params[:from] 
+	to = params[:to]
+	get_events(from, to)
+end
+
+def get_events(from, to)
+	events = Vault.all
+	all_events = []
+	events.each do |e|
+		if e.date >= from or e.date <= to
+			all_events << e
+		end
+	end
+	return all_events
+end
+
+get '/summary?from=:from&to=to&by=:by' do
+	from = params[:from] 
+	to = params[:to]
+	by = params[:by]
+	get_summary(from, to, by)
+end
+
+def get_summary(from, to, by)
+	events = Vault.all
+	all_events = []
+	new_from = parse_date(from, by)
+	new_to = parse_date(to, by)
+	events.each do |e|
+		if e.date >= new_from or e.date <= new_to
+			all_events << e
+		end
+	end
+	return all_events
+end
+
+def parse_date(date,by)
+	if by == "minute"
+
+	elsif by == "hour"
+
+	elsif by == "hour"
+
+	else
+		LOG.error "Please specify the timeframe as : minute, hour or day"
+		raise "Please specify the timeframe as : minute, hour or day"
+	end
+
+end
+
 
 def which_type(event)
 
