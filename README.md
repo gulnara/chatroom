@@ -8,8 +8,11 @@ Usage:
 ------
 
 To create dummy data:
-ruby app.rb
-ruby dummy_data.rb
+
+1)run the app
+				ruby app.rb
+2) seed data
+				ruby dummy_data.rb
 
 To get a list of events from 2014-01-01T00:00:00Z to 2014-03-28T13:01:00Z :
 
